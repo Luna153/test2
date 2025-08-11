@@ -1,13 +1,33 @@
+'use client';
+// import React from 'react';
+import { useTranslation } from 'react-i18next';
 import Image from "next/image";
 import styles from "./page.module.css";
 
 const basePath = process.env.NODE_ENV === 'production' ? '/test2' : '';
 
 
+
 export default function Home() {
+
+  const { t, i18n } = useTranslation();
+  const switchLanguage = (lang: string) => {
+    i18n.changeLanguage(lang); // 不改網址
+  };
+
   return (
     <div className={styles.page}>
+
       <main className={styles.main}>
+        <h1>{t('greeting')}</h1>
+        <p>{t('description')}</p>
+
+        <div style={{ marginTop: '20px' }}>
+          <button onClick={() => switchLanguage('en')}>English</button>
+          <button onClick={() => switchLanguage('zh')} style={{ marginLeft: '10px' }}>
+            中文
+          </button>
+        </div>
         <Image
           className={styles.logo}
           src={`${basePath}/next.svg`}
@@ -96,3 +116,8 @@ export default function Home() {
     </div>
   );
 }
+
+
+
+
+
